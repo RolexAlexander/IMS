@@ -1,0 +1,50 @@
+[
+    {
+        "question": "What causes traffic congestion?",
+        "answer": "Traffic congestion is caused by a variety of factors, including an increase in the number of vehicles on the road, road construction and maintenance, poor road design, and accidents."
+    },
+    {
+        "question": "How can traffic be reduced?",
+        "answer": "Traffic can be reduced by implementing measures such as carpooling, public transportation, bike lanes, and telecommuting programs. Additionally, improving road design, optimizing traffic flow, and enforcing traffic laws can also help reduce traffic congestion."
+    },
+    {
+        "question": "What are some ways to alleviate traffic during rush hour?",
+        "answer": "Some ways to alleviate traffic during rush hour include encouraging carpooling, expanding public transportation options, providing alternative routes, and adjusting work schedules."
+    },
+    {
+        "question": "How does weather affect traffic?",
+        "answer": "Weather can significantly impact traffic, particularly during severe weather conditions such as snowstorms, heavy rain, or strong winds. Weather can cause road closures, reduce visibility, and increase the risk of accidents, leading to increased traffic congestion."
+    },
+    {
+        "question": "What is intelligent transportation system (ITS)?",
+        "answer": "Intelligent transportation system (ITS) is a collection of technologies and tools used to improve the safety, efficiency, and sustainability of transportation systems. ITS includes real-time traffic monitoring, incident management, traffic control, and traveler information systems, among other things."
+    },
+    {
+        "question": "Is there a way to avoid the traffic?",
+        "answer": "There are several ways to avoid traffic, including taking alternative routes, adjusting your travel schedule, or using public transportation."
+    },
+    {
+        "question": "What is the best time to leave to avoid the traffic?",
+        "answer": "The best time to leave to avoid traffic varies based on several factors such as the time of day, the location, and the day of the week. It is best to check the current traffic conditions and plan your journey accordingly."
+    },
+    {
+        "question": "How long will it take to reach my destination during rush hour traffic?",
+        "answer": "The time it takes to reach your destination during rush hour traffic will vary based on several factors such as the distance, the road conditions, and the traffic flow. It is best to check real-time traffic updates to get a more accurate estimate."
+    },
+    {
+        "question": "How Long does it take for my traffic report to be processed?",
+        "answer": "It takes on average 48 hours for a traffic report to be processed."
+    },
+    {
+        "question": "Can I provide video insted of images?",
+        "answer": "Sure you can, just ensure that the video is less than 1 minute."
+    },
+    {
+        "question": "What items do I need to provide to make a report?",
+        "answer": "You need to provide a description of the incident along with the location and a mandatory image or video."
+    },
+    {
+        "question": "What can I ask you?",
+        "answer": "You can ask me to make a report, subscribe for traffic alerts and the latest traffic updates."
+    }
+]

@@ -1,0 +1,26 @@
+# from jaseci:latest
+# from jaseci-ai-kit:latest
+# from jac-nlp:latest
+# from jaseci-serv:latest
+
+# WORKDIR C:\Users\rolex\IMS Project\JaseciApp-0.1
+# ENV DEBIAN_FRONTEND=nointeractive
+# COPY . .
+# ENV DEBIAN_FRONTEND=nointeractive
+# RUN echo "Image built successfully"
+# CMD [ "jsserv runserver 0.0.0.0:9000" ]
+# Specify your base image
+FROM jaseci/jac-nlp:latest
+
+# Set working directory. / is fine for most scenarios.
+WORKDIR /
+
+# Install any linux dependencies
+ENV DEBIAN_FRONTEND=nointeractive
+RUN apt -y update
+RUN apt-get update
+RUN pip install twilio
+
+# Copy any pre-trained models required for the jac program.
+COPY . .
+CMD [ "jsserv", "runserver", "0.0.0.0:9000" ]

@@ -1,0 +1,374 @@
+[
+  {
+    "name": "greetings",
+    "responses": [
+      "Hello! How can I help you today?",
+      "Hi! What can I assist you with?",
+      "Good day! How can I be of service?",
+      "Greetings! How can I make your day better?",
+      "Hi there! What can I do for you today?",
+      "Good morning/afternoon/evening! How may I help you?",
+      "Hello, my friend! What brings you here today?",
+      "Hi, it's nice to see you! How can I assist?",
+      "Greetings, I'm here to help! What can I do for you?",
+      "Hello! I'm here to make your day a little easier, how can I help?"
+    ],
+    "extracted_item": {},
+    "variable": [],
+    "resource": ""
+  },
+  {
+    "name": "subscribe",
+    "responses": [
+      "Sure thing! I can help you sign up for traffic alerts.",    
+      "Of course! Let me assist you in subscribing for traffic updates.",    
+      "No problem! I can assist you in receiving traffic alerts.",    
+      "Absolutely! I'd be happy to help you be informed of traffic updates.",    
+      "Sure thing! I'll help you receive traffic notifications.",    
+      "Absolutely! I can add you to the traffic alert list.",    
+      "Of course! Let me assist you in subscribing for traffic reports.",    
+      "No problem! I'll help you get traffic updates sent to you.",    
+      "Absolutely! I'll assist you in being notified of traffic changes.",    
+      "Of course! I'd be happy to help you subscribe for traffic updates."
+    ],
+    "extracted_item": {},
+    "variable": [],
+    "resource": ""
+  },
+  {
+    "name": "unsubscribe",
+    "responses": [
+        "Okay, I'll remove you from the traffic alert list.",
+        "No problem, I'll stop sending you traffic notifications.",
+        "I understand, I'll unsubscribe you from traffic updates.",
+        "Sure thing, I'll take you off the traffic alert list.",
+        "I'll make sure to turn off traffic alerts for your account.",
+        "I got it, I'll cancel your traffic alert subscription.",
+        "I'll make sure you no longer receive traffic alerts.",
+        "I'll deactivate traffic alerts for you.",
+        "Understood, I'll stop sending traffic notifications to you.",
+        "I'll remove your name from the traffic alert list."
+    ],
+    "extracted_item": {},
+    "variable": [],
+    "resource": ""
+  },
+  {
+    "name": "status",
+    "responses": [
+      "We're sorry, but our server is currently down, so we can't check the status of your report.",  
+      "Our server is currently offline, so we can't provide you with an update on your report at this time.",  
+      "Due to a server outage, we're unable to check the status of your report at the moment.",  
+      "We're having technical difficulties with our server and can't access your report status right now.",  
+      "Sorry, but our server is currently unavailable and we can't check your report status at this time.",  
+      "We apologize, but the server is down and we can't verify the status of your report.",  
+      "I'm sorry, but our server is temporarily offline and we can't check your report status at this time.",  
+      "Due to a server issue, we're unable to verify the status of your report right now.",  
+      "We regret to inform you that our server is down and we can't check your report status at the moment.",  
+      "Unfortunately, our server is currently unavailable and we can't provide an update on your report status."
+    ],
+    "extracted_item": {},
+    "variable": [],
+    "resource": ""
+  },
+  {
+    "name": "traffic_alert",
+    "responses":  [
+      "Here is the latest traffic report.",
+      "Here's the current traffic situation.",
+      "Let me provide you with the latest traffic updates.",
+      "Here is the latest on the roads.",
+      "Here's the status of the traffic.",
+      "The current traffic flow is as follows.",
+      "Here's what I know about the current traffic conditions.",
+      "Here's an update on the roads.",
+      "Here's what I've got on the latest traffic situation.",
+      "Here's the current state of the roads."  
+    ],
+    "extracted_item": {},
+    "variable": [],
+    "resource": ""
+  },
+  {
+    "name": "goodbye",
+    "responses": [
+      "Goodbye! Have a great day!",
+      "Farewell! Take care.",
+      "See you later!",
+      "Until next time!",
+      "It was great talking to you. Goodbye!",
+      "Goodbye, take care!",
+      "Adios!",
+      "Goodbye and have a wonderful day!",
+      "Peace out!",
+      "Ciao!"
+    ],
+    "extracted_item": {},
+    "variable": [],
+    "resource": ""
+  },
+  {
+    "name": "failed_request",
+    "responses": {
+      "subscribe": [
+        "It appears that you're already signed up for traffic updates.",    
+        "I noticed that you have already subscribed for traffic alerts.",    
+        "I see that you're on the list for receiving traffic updates.",    
+        "You seem to be all set for traffic notifications.",    
+        "I have confirmed that you have subscribed for traffic news.",    
+        "It looks like you are already receiving traffic updates.",    
+        "I'm informed that you are subscribed for traffic notifications.",    
+        "I'm aware that you have already signed up for traffic updates.",    
+        "You seem to have already registered for traffic alerts.",    
+        "I have it on record that you have subscribed for traffic updates."
+      ],
+      "unsubscribe": [
+        "It appears that you have already unsubscribed from receiving traffic updates.",    
+        "It seems that you have opted out of traffic updates already.",    
+        "You have already unsubscribed from traffic updates, it seems.",    
+        "It looks like you have decided to no longer receive traffic updates.",    
+        "Traffic updates seem to be something you have chosen to opt out of.",    
+        "From what I can see, you are no longer subscribed to traffic updates.",    
+        "You seem to have already removed yourself from the traffic updates list.",    
+        "Traffic updates appear to not be something you want to receive anymore.",    
+        "It seems that traffic updates are no longer part of your subscribed list.",    
+        "Your status for traffic updates appears to be set as unsubscribed."
+      ]
+    }
+  },
+  {
+    "name": "successful_request",
+    "responses": {
+      "subscribe": [
+        "You're now subscribed for traffic updates. Need anything else?",
+        "Traffic updates subscription confirmed. Can I assist with anything else?",
+        "You have successfully signed up for traffic updates. Anything else I can do for you?",
+        "Subscribed for traffic updates. Is there anything else I can assist you with?",
+        "Your traffic updates subscription is all set. How else can I help you today?",
+        "Confirmed: you are now subscribed for traffic updates. Can I do anything else for you?",
+        "Traffic updates subscription complete. Do you need help with anything else?",
+        "You are now receiving traffic updates. Can I assist with anything else?",
+        "Subscription to traffic updates successful. Is there anything else I can help you with?",
+        "Your traffic updates subscription is in place. Can I be of any further assistance?"
+      ],
+      "unsubscribe": [
+        "Your number has been removed from traffic updates. Need anything else?",
+        "You're all set! Your number won't receive traffic updates anymore. Can I assist with anything else?",
+        "Good news, your number has been taken off traffic updates. Is there anything else I can do for you?",
+        "Your request has been processed, your number won't receive traffic updates anymore. Anything else I can help with?",
+        "All done! Your number has been removed from traffic update notifications. How else can I be of service?",
+        "Traffic updates for your number have been discontinued. Can I assist with anything else?",
+        "Your number won't receive traffic updates anymore, it's been successfully removed. Need anything else?",
+        "Traffic updates for your number are a thing of the past. Is there anything else I can help with?",
+        "You're no longer subscribed to traffic updates. Is there anything else I can do for you?",
+        "Your number has been successfully unlinked from traffic updates. Can I help with anything else?"
+      ]
+    }
+  },
+  {
+    "name": "service_not_offered",
+    "responses": [
+      "Unfortunately, that task is beyond my current capabilities.",
+      "My apologies, but I'm not equipped to handle that yet.",
+      "I regret to inform you, I am unable to handle that at this time.",
+      "My programming hasn't advanced enough to handle that yet.",
+      "I'm sorry, but I'm not developed enough to take on that task yet.",
+      "I'm afraid I cannot handle that request at this time.",
+      "My AI limitations prevent me from handling that for now.",
+      "I'm sorry, but I haven't learned how to handle that just yet.",
+      "Unfortunately, that function is not within my capabilities yet.",
+      "I'm sorry, but I'm not capable of handling that task at present."
+    ]
+  },
+  {
+    "name": "unanswered_question",
+    "responses": {
+      "image": [
+        "It's necessary to accompany a traffic issue report with an image. Could you provide one?",
+        "An image is a requirement for reporting traffic issues. Could you kindly upload one?",
+        "To make a traffic issue report, an image must be submitted. Can you share the image with us?",
+        "In order to file a traffic issue report, we need an image. Would you be able to provide one?",
+        "Kindly include an image when reporting traffic issues. Can you send it over?",
+        "An image is an essential component of traffic issue reports. Can you provide it for us?",
+        "Please attach an image to your traffic issue report. Can you arrange for it to be sent?",
+        "The submission of an image is mandatory when reporting traffic issues. Could you please supply one?",
+        "To report a traffic issue effectively, an image must be included. Would you be willing to provide it?",
+        "Traffic issue reports require the addition of an image. Could you furnish us with one, please?"
+      ],
+      "location": [
+        "It's necessary to include the location of the incident when reporting a traffic issue. Could you please provide it?",    
+        "To report a traffic issue, the location of the incident must be indicated. Can you give us the location?",    
+        "In order to file a traffic issue report, we need the location of the incident. Would you be able to provide it?",    
+        "Kindly specify the location of the incident when reporting traffic issues. Can you give us the location?",    
+        "Please include the location of the incident when making a traffic issue report. Can you send it over?",    
+        "The location of the incident is an essential component of traffic issue reports. Can you provide it for us?",    
+        "Attach the location of the incident to your traffic issue report. Can you arrange for it to be sent?",    
+        "The submission of the location of the incident is mandatory when reporting traffic issues. Could you please supply it?",    
+        "To report a traffic issue effectively, the location of the incident must be included. Would you be willing to provide it?",    
+        "Traffic issue reports require the addition of the location of the incident. Could you furnish us with it, please?"
+      ],
+      "image_and_location": [
+        "It's necessary to include the location and an image of the incident when reporting a traffic issue. Could you please provide both?",    
+        "To report a traffic issue, the location and an image of the incident must be indicated. Can you give us both the location and the image?",    
+        "In order to file a traffic issue report, we need both the location and an image of the incident. Would you be able to provide them?",    
+        "Kindly specify the location and provide an image of the incident when reporting traffic issues. Can you give us both?",    
+        "Please include the location and an image of the incident when making a traffic issue report. Can you send them over?",    
+        "The location and an image of the incident are essential components of traffic issue reports. Can you provide them for us?",    
+        "Attach the location and an image of the incident to your traffic issue report. Can you arrange for them to be sent?",    
+        "The submission of both the location and an image of the incident is mandatory when reporting traffic issues. Could you please supply them?",    
+        "To report a traffic issue effectively, both the location and an image of the incident must be included. Would you be willing to provide them?",    
+        "Traffic issue reports require the addition of both the location and an image of the incident. Could you furnish us with them, please?"
+      ]
+    }
+  },
+  {
+    "name": "ask",
+    "responses": {
+      "location": [
+        "Can you please tell me the location of the incident?",    
+        "Where did the incident take place?",    
+        "Can you give me the location where the incident occurred?",    
+        "Could you inform me of the location of the incident?",    
+        "Kindly let me know the location of the incident",    
+        "Could you specify the location where the incident happened?",    
+        "Can you provide the location of the incident?",    
+        "I'd like to know the location of the incident. Can you tell me?",    
+        "The location of the incident is important. Can you share it with me?",    
+        "Where was the incident located?"
+      ],
+      "image": [
+        "Could you please send an image of the incident?",    
+        "Can you provide an image related to the incident?",    
+        "Could you send me a picture of the incident?",    
+        "I'd like to see an image of the incident. Can you provide one?",    
+        "Can you send a photograph of the incident?",    
+        "Would you mind sharing an image of the incident?",    
+        "Can you provide an image to help visualize the incident?",    
+        "I would appreciate it if you could send an image of the incident.",    
+        "Can you furnish me with an image of the incident?",    
+        "Could you supply an image that relates to the incident?"
+      ],
+      "description": [
+        "Can you give a detailed description of the incident?",    
+        "Can you describe the incident that took place?",    
+        "Would you mind describing the incident for me?",    
+        "Can you provide a comprehensive description of the incident?",    
+        "Could you please explain the incident that occurred?",    
+        "Can you give me an account of the incident?",    
+        "Kindly provide a description of the incident.",    
+        "Can you describe what happened during the incident?",    
+        "Can you narrate the incident for me?",    
+        "I'd like to know more about the incident. Can you describe it for me?"
+      ]
+    }
+  },
+  {
+    "name": "confirm_user",
+    "responses": {
+      "default": [
+        "Can you confirm that all the information provided in the traffic report is accurate?",    
+        "Please verify that the information in the traffic report is correct.",    
+        "Can you confirm the accuracy of the traffic report?",    
+        "Kindly confirm that the traffic report is accurate in its entirety.",    
+        "Is the information in the traffic report correct?",    
+        "Please confirm that the information about the traffic report is accurate.",    
+        "Can you validate the accuracy of the traffic report?",    
+        "Are the details in the traffic report correct?",    
+        "Please confirm the truthfulness of the information in the traffic report.",    
+        "Can you verify that all the information about the traffic report is correct?"
+      ],
+      "yes": [
+        "Your report has been registered and will be forwarded to the relevant authorities. Your case reference number is {case_number}. Is there anything else I can help you with?",    
+        "The relevant authorities have been notified of your report. Your reference number is {case_number}. Need anything else?",    
+        "Your report has been successfully registered. Reference number {case_number}. Can I assist you with anything else?",    
+        "The report you submitted has been received and forwarded to the proper authorities. Your reference number is {case_number}. Anything else I can do for you?",    
+        "We've registered your report and it will be sent to the right people. Your reference number is {case_number}. Is there anything else you need?",    
+        "The authorities have been informed of your report. Your reference number is {case_number}. Do you need anything else?",    
+        "Your report has been documented and sent to the relevant parties. Your case reference is {case_number}. Is there anything else I can assist you with?",    
+        "I have registered your report and it will be forwarded to the relevant authorities. Your reference number is {case_number}. Can I help you with anything else?",    
+        "Your report has been recorded and will be passed along to the right authorities. Your case reference number is {case_number}. Do you need anything else?",    
+        "We've received your report and it has been forwarded to the proper authorities. Your reference number is {case_number}. Anything else I can do for you?"
+      ],
+      "no": [
+        "Your report will be cancelled.",    
+        "I'm sorry, but your report will not be processed.",    
+        "Unfortunately, your report will be cancelled.",    
+        "The report will not be submitted.",    
+        "Your report will be disregarded.",    
+        "The report will be cancelled.",    
+        "I regret to inform you that your report will not be accepted.",    
+        "Your report will be withdrawn.",    
+        "The report will be annulled.",    
+        "Your report will not be considered."
+      ]
+    }
+  },
+  {
+    "name": "cancel_user",
+    "responses": {
+      "default": [
+        "Would you like to cancel your report?",    
+        "Do you wish to cancel the report?",    
+        "Is there a reason to cancel the report?",    
+        "Would you like to withdraw your report?",    
+        "Are you sure you want to cancel the report?",    
+        "Would you prefer to cancel the report?",    
+        "Do you want to abandon the report?",    
+        "Is there a need to cancel the report?",    
+        "Should the report be cancelled?",    
+        "Do you have a desire to cancel the report?"
+      ],
+      "yes": [
+        "Your report will be cancelled.",    
+        "I'm sorry, but your report will not be processed.",    
+        "Unfortunately, your report will be cancelled.",    
+        "The report will not be submitted.",    
+        "Your report will be disregarded.",    
+        "The report will be cancelled.",    
+        "I regret to inform you that your report will not be accepted.",    
+        "Your report will be withdrawn.",    
+        "The report will be annulled.",    
+        "Your report will not be considered."
+      ],
+      "no": [
+        "Your report will not be cancelled.",    
+        "Don't worry, your report will still be processed.",    
+        "Good news, your report will not be cancelled.",    
+        "The report will be submitted as planned.",    
+        "Your report will be considered.",    
+        "No need to worry, the report will not be cancelled.",    
+        "Your report is safe, it will not be cancelled.",    
+        "The report will continue as planned.",    
+        "No cancellation necessary, the report will proceed.",    
+        "The report will remain active and not be cancelled."
+      ],
+      "no_report": [
+        "I'm sorry, it looks like there are no reports for you to cancel.",
+        "I couldn't find any reports for you to cancel.",
+        "Unfortunately, there are no reports available for cancellation.",
+        "No reports were detected for cancellation.",
+        "I don't see any reports that you can cancel.",
+        "No reports match the criteria for cancellation.",
+        "I'm afraid there are no reports that you can cancel at this time.",
+        "No reports found that meet the requirements for cancellation.",
+        "I'm sorry, no reports are eligible for cancellation.",
+        "Unfortunately, no reports have been identified for cancellation."
+      ]
+    }
+  },
+  {
+    "name": "repeat_report",
+    "responses": [
+      "Could you kindly provide the information mentioned above so that I can complete the report?",
+      "I would appreciate it if you could provide the information mentioned earlier so that I can complete the report.",
+      "If it's not too much trouble, could you please provide the information mentioned above to help me complete the report?",
+      "To complete the report, could you kindly provide the information mentioned above?",
+      "Would you mind providing the information mentioned earlier so that I can complete the report?",
+      "If possible, could you please provide the information mentioned above to help me finish the report?",
+      "I kindly request that you provide the information mentioned earlier so that I can complete the report.",
+      "May I please ask you to provide the information mentioned above to help me complete the report?",
+      "Can I kindly ask you to provide the information mentioned earlier so that I can complete the report?",
+      "It would be very helpful if you could provide the information mentioned above to help me complete the report."
+    ]
+  }
+]
