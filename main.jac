@@ -1,6 +1,6 @@
 import {*} with "./graphs.jac";
 import {*} with "./globals.jac";
-// import {*} with "./training_app/training_walkers.jac";
+import {*} with "./training_app/training_walkers.jac";
 import {*} with "./conv_app/conv_walkers.jac";
 
 import {*} with './utils/model/kit/bi_enc.jac';
@@ -11,7 +11,7 @@ import {*} with './utils/model/kit/zs_classifier.jac';
 walker init {
     root{
         global.main_root = here.info["jid"];
-
+        std.log("This is the main root id: ", global.main_root);
         take -[_train]-> node::_train else {
             spawn here +[_train]+> graph::training_graph;
         }

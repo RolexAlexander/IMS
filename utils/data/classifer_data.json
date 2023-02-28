@@ -12,7 +12,13 @@
     "How Long does it take for my traffic report to be processed?",
     "Can I provide video insted of images?",
     "What items do I need to provide to make a report?",
-    "What can I ask you?"
+    "What can I ask you?",
+    "What kind of requests can I make to you?",
+    "How can I cancel a report?",
+    "What information is needed to make an incident report?",
+    "What should I do if I forget my case number?",
+    "How do I subscribe to traffic alerts?",
+    "Is it possible to exclude the location from a report?"
   ],
   "goodbye": [
     "goodbye",
@@ -165,7 +171,8 @@
       "I was on my way to the grocery store when I saw a car with a broken taillight on the side of the road. The incident happened near the busy intersection, and the broken taillight could cause an accident if someone hits the car from behind. I decided to make a report about it and contacted the local authorities, providing them with the location and a detailed description of the scene.",
       "I was driving to work when I noticed a car parked in a no-parking zone. The incident happened near the office building, and the car was causing inconvenience to other drivers. I decided to make a report and contacted the local authorities, providing them with the location and a detailed description of the scene. The local authorities arrived shortly after and took action against the violator.",
       "I was on my way to the gym when I saw a pedestrian jaywalking across a busy road. The incident was near the downtown area, and the pedestrian was risking their life crossing the road without using the pedestrian crossing. I decided to make a report about it and contacted the local authorities, providing them with the location and a detailed description of the scene.",
-      "I was driving on the highway when I saw a car with a broken windshield driving in the opposite direction. The incident happened near the exit to the industrial area, and the broken windshield could obscure the driver's view and cause an accident. I decided to make a report about"
+      "I was driving on the highway when I saw a car with a broken windshield driving in the opposite direction. The incident happened near the exit to the industrial area, and the broken windshield could obscure the driver's view and cause an accident. I decided to make a report about",
+      "i want to make an incident report"
   ],
   "cancellation": [
     "I request to retract my report.",
@@ -190,5 +197,32 @@
     "Can you provide information on the status of my report?",    
     "I want to know if there have been any updates on my report",    
     "I'm looking for information on the status of my report"
+  ],
+  "case_number": [
+    "The case number associated with my report is CASE469.",
+    "My report is linked to case number CASE469.",
+    "I have a case number for my report, which is CASE469.",
+    "CASE469 is the case number for my report.",
+    "My case ID is CASE469.",
+    "I'm interested in the status of the report with the case number CASE456.",
+    "I'm looking for information about the report with the case number CASE456.",
+    "Can you provide me with the status of the report linked to case number CASE456?",
+    "I would like to know the current status of the report with the case number CASE456.",
+    "I'm trying to find out the status of the report with the case number CASE456.",
+    "I would like to cancel my report, which is associated with case number CASE345.",
+    "Can you cancel the report with the case number CASE345 that I submitted?",
+    "I want to cancel my report, and the case number for it is CASE345.",
+    "The report that I want to cancel has the case number CASE345.",
+    "I have a report with the case number CASE345 that I would like to cancel.",
+    "I'm wondering about the current status of my report with the case number[CASE40.",
+    "Can you provide me with an update on the report associated with the case number[CASE40?",
+    "I have a report with the case number[CASE40 and would like to know its status.",
+    "What's the status of the report linked to the case number[CASE40?",
+    "I'm trying to find out the status of my report, and the case number is[CASE40.",
+    "Can you cancel the report linked to the case number CASE456?",
+    "I would like to cancel the report that has the case number CASE456.",
+    "My report has the case number CASE456, and I want to cancel it.",
+    "Could you cancel the report with the case number CASE456?",
+    "I have a report with the case number CASE456 that I want to cancel."
   ]
 }

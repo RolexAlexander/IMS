@@ -115,9 +115,7 @@ node dialogue_state{
     can flow.collect_info;
     can flow.select_options;
     can flow.check_required_entity;
-    can latest.update;
-    // can I.get_audio, I.get_image, I.get_video;
-    // can location.get_details;
+    can I.get_audio, I.get_image, I.get_video, send.case_report;
 
     can set_question{
         std.out("before question: ",visitor.question);
@@ -146,11 +144,29 @@ node dialogue_state{
                 if((visitor.dialogue_context["last_node"] = "describe") || (visitor.dialogue_context["last_node"] = "location") || (visitor.dialogue_context["last_node"] = "image")){
                     visitor.threshold = true;
                     visitor.predicted_intent = "traffic_report";
+                }else{
+                    response = spawn here walker::send_reply_with_reaction(phone_number=visitor.phone_number, message_id=visitor.user_data["message_id"], emoji="👍");
                 }
             }
             if(classes[index] in affirmative_data){
                 std.out("_______________________affirmative response___________________");
+                response = spawn here walker::send_reply_with_reaction(phone_number=visitor.phone_number, message_id=visitor.user_data["message_id"], emoji="👍");
             }
+        }
+    }
+
+    can handle_case_number{
+        data = file.load_json(global.train_classifer_path);
+        case_number = data["case_number"];
+        classes = [];
+        classes.list::extend(case_number);
+        best_answer = use.text_classify(text = visitor.question, classes = classes);
+        max_score = global.conv_score;
+        index = best_answer["match_idx"];
+        scores = best_answer["scores"];
+        if(scores[index] > max_score){
+            visitor.predicted_intent = visitor.dialogue_context["last_node"];
+            std.log("This is the new intent", visitor.dialogue_context["last_node"], visitor.predicted_intent);
         }
     }
 
@@ -184,111 +200,66 @@ node dialogue_state{
         visitor.dialogue_context["repeat_report"] = true;
     }
 
-    // can retrieve_media with talk entry{
-    //     std.out("before question: ",visitor.question);
-    //     if(visitor.user_data){
-    //         std.out("User sent a media");
-    //         std.out(visitor.user_data);
-    //         if(visitor.media_type == "location"){
-    //             if(("Latitude" in visitor.user_data) && ("Longitude" in visitor.user_data)){
-    //                 // Get the location description
-    //                 result = location.get_details(visitor.user_data["Latitude"], visitor.user_data["longitude"]);
-    //                 // address = result["display_name"];
-    //                 visitor.dialogue_context["location"].list::extend(result);
-    //                 if(!"location" in visitor.dialogue_context["recieved"]){
-    //                     visitor.dialogue_context["recieved"].list::append("location");
-    //                 }
-    //                 std.out("Got the user location");
-    //             }
-    //         }
-    //         if(visitor.media_type == "document"){
-    //             if(("document_type" in visitor.user_data) && ("document_id" in visitor.user_data)){
-    //                 // Get the video
-    //                 filename = rand.word()+".mp4";
-    //                 null_variables = "";
-    //                 visitor.dialogue_context["video"].list::append(filename);
-    //                 I.get_video(visitor.user_data["document_id"], filename);
-    //                 if(!"image" in visitor.dialogue_context["recieved"]){
-    //                     visitor.dialogue_context["recieved"].list::append("image");
-    //                 }
-    //                 visitor.media_url = null;
-    //             }else{
-    //                 std.out("We are not required to download this media");
-    //             }
-    //         }
-    //         if(visitor.media_type == "image"){
-    //             if("image_id" in visitor.user_data){
-    //                 filename = rand.word()+".jpg";
-    //                 null_variables = "";
-    //                 visitor.dialogue_context["image"].list::append(filename);
-    //                 I.get_image(visitor.user_data["image_id"], filename);
-    //                 if(!"image" in visitor.dialogue_context["recieved"]){
-    //                     visitor.dialogue_context["recieved"].list::append("image");
-    //                 }
-    //                 visitor.media_url = null;
-    //             }
-    //         }
-    //         if(visitor.media_type == "audio"){
-    //             if("" in visitor.user_data){
-    //                 // download media
-    //             }
-    //         }
-    //         if(visitor.media_type == "interactive"){
-    //             if("" in visitor.user_data){
-    //                 // download media
-    //             }
-    //         }
-                
-    //         // if(visitor.media_type == "image/jpeg"){
-    //         //     filename = rand.word()+".jpg";
-    //         //     null_variables = "";
-    //         //     visitor.dialogue_context["image"].list::append(filename);
-    //         //     I.get_media(visitor.media_url, null_variables, null_variables, filename);
-    //         //     if(!"image" in visitor.dialogue_context["recieved"]){
-    //         //         visitor.dialogue_context["recieved"].list::append("image");
-    //         //     }
-    //         //     visitor.media_url = null;
-    //         // }
-    //         // if(visitor.media_type == "video"){
-    //         //     filename = rand.word()+".mp4";
-    //         //     null_variables = "";
-    //         //     visitor.dialogue_context["image"].list::append(filename);
-    //         //     I.get_media(null_variables, null_variables, visitor.media_url, filename);
-    //         //     visitor.media_url = null;
-    //         // }
-    //         // if(visitor.media_type == "audio"){
-    //         //     filename = rand.word()+".mp3";
-    //         //     null_variables = "";
-    //         //     visitor.dialogue_context["image"].list::append(filename);
-    //         //     I.get_media(null_variables, visitor.media_url, null_variables, filename);
-    //         //     visitor.media_url = null;
-    //         // }
-    //     }
-    //     if(!visitor.question || visitor.question == " "){
-    //         std.out("User has no question");
-    //         visitor.question = "Can I report a road problem?";
-    //     }
-    //     std.out("After question: ",visitor.question);
-    //     std.out(visitor.dialogue_context);
-    // }
+    can retrieve_media with talk entry{
+        std.out("before question: ",visitor.question);
+        if(visitor.user_data){
+            std.out("User sent a media");
+            std.out(visitor.user_data);
+            if(visitor.media_type == "location"){
+                if(("Latitude" in visitor.user_data) && ("Longitude" in visitor.user_data)){
+                    visitor.dialogue_context["live_location"]["latitude"] = visitor.user_data["Latitude"];
+                    visitor.dialogue_context["live_location"]["longitude"] = visitor.user_data["longitude"];
+                    if(!"location" in visitor.dialogue_context["recieved"]){
+                        visitor.dialogue_context["recieved"].list::append("location");
+                    }
+                    std.out("Got the user location");
+                }
+            }
+            if(visitor.media_type == "document"){
+                if(("document_type" in visitor.user_data) && ("document_id" in visitor.user_data)){
+                    // Get the video
+                    filename = rand.word()+".mp4";
+                    null_variables = "";
+                    visitor.dialogue_context["video"].list::append(filename);
+                    I.get_video(visitor.user_data["document_id"], filename);
+                    if(!"image" in visitor.dialogue_context["recieved"]){
+                        visitor.dialogue_context["recieved"].list::append("image");
+                    }
+                    visitor.media_url = null;
+                }else{
+                    std.out("Time to excercise my coding muscles");
+                }
+            }
+            if(visitor.media_type == "image"){
+                if("image_id" in visitor.user_data){
+                    filename = rand.word()+".jpg";
+                    null_variables = "";
+                    visitor.dialogue_context["image"].list::append(filename);
+                    I.get_image(visitor.user_data["image_id"], filename);
+                    if(!"image" in visitor.dialogue_context["recieved"]){
+                        visitor.dialogue_context["recieved"].list::append("image");
+                    }
+                    visitor.media_url = null;
+                }
+            }
+            if(visitor.media_type == "audio"){
+                if("" in visitor.user_data){
+                    // download media
+                }
+            }
+            if(visitor.media_type == "interactive"){
+                if("" in visitor.user_data){
+                    // download media
+                }
+            }
+        }
+    }
 
-    can classify_intent {
-        // labels = ["not_traffic_report", "traffic_report"];
-        // bi_intent = bi_enc.infer(
-        //     contexts=[visitor.question],
-        //     candidates=labels,
-        //     context_type="text",
-        //     candidate_type="text"
-        // );
-        // std.out(bi_intent);
-        // bi_intent = bi_intent[0]["predicted"]["label"];
-        // if(bi_intent == "traffic_report"){
-        //     visitor.predicted_intent = "traffic_report";
-        //     visitor.threshold = true;
-        //     std.log("THRESHOLD: ", global.conv_score,"   SCORE: " , 90);
-        //     std.log("INTENT:  ", visitor.predicted_intent);
-        // }else{
-            ::set_question;
+    can classify_intent{
+        ::set_question;
+        if(visitor.dialogue_context["last_node"] == "description"){
+            visitor.predicted_intent = "traffic_report";
+        }else{
             if(visitor.respond){
                 imprints = -[intent_transition]->.imprint;
                 intent_labels = -[intent_transition]->.edge.intent;
@@ -314,48 +285,43 @@ node dialogue_state{
                             max_score = best_answer['scores'][nn];
                             intent = imprint[0].name;
                         }
-                            // std.out('here.name\n');
-                            // std.out(here.name);
-                            // std.out(best_answer['scores'][nn]);
-                            // std.out(imprint[0].name);
+                        // std.out('here.name\n');
+                        // std.out(here.name);
+                        // std.out(best_answer['scores'][nn]);
+                        // std.out(imprint[0].name);
                     }
                 }
-                    
+                        
                 if (max_score > global.conv_score and intent in intent_labels){
                     visitor.threshold = true;
                     visitor.predicted_intent = intent;
                 }
                 std.log("THRESHOLD: ", global.conv_score,"   SCORE: " , max_score, " user utterance: ", visitor.question);
                 std.log("INTENT:  ", visitor.predicted_intent);
-                if(!visitor.predicted_intent){
-                    ::handle_negative_and_affirmative_response;
-                    if(!visitor.predicted_intent){
-                        std.out("_________________AI Doesn't Understand the user request___________________________________");
-                        data = file.load_json(global.train_state_path);
-                        responses = [];
-                        for obj in data{ 
-                            if("service_not_offered" == obj["name"]){
-                                data = obj;
-                            }
-                        }
-                        responses = data["responses"];
-                        visitor.response = rand.choice(responses);
-                        response = spawn here walker::send_message(phone_number = visitor.phone_number, answer = visitor.response);
-                        visitor.response = null;
-                    }
-                    
+                if(visitor.predicted_intent == "case_number"){
+                    visitor.predicted_intent = visitor.dialogue_context["last_node"];
+                    std.log("This is the new intent", visitor.dialogue_context["last_node"], visitor.predicted_intent);
                 }
-            }
-        // }  
-        // if((visitor.predicted_intent == "yes") || (visitor.predicted_intent == "no")){
-        //     std.out("xxxxxxxxxxxxxxxxxxxx__User is confirming something about traffic report__xxxxxxxxxxxxxxxxxxxxxxxxx");
-        //     std.out(visitor.predicted_intent);
-        //     std.out("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-        //     visitor.predicted_intent = "traffic_report";
-        // }
-        // std.out("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-        // std.out(visitor.predicted_intent);
-        // std.out("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+                // if(!visitor.predicted_intent){
+                //     ::handle_negative_and_affirmative_response;
+                //     if(!visitor.predicted_intent){
+                //         std.out("_________________AI Doesn't Understand the user request___________________________________");
+                //         data = file.load_json(global.train_state_path);
+                //         responses = [];
+                //         for obj in data{ 
+                //             if("service_not_offered" == obj["name"]){
+                //                 data = obj;
+                //             }
+                //         }
+                //         responses = data["responses"];
+                //         visitor.response = rand.choice(responses);
+                //         response = spawn here walker::send_message(phone_number = visitor.phone_number, answer = visitor.response);
+                //         visitor.response = null;
+                //     }
+                        
+                // }
+            } 
+        }
     }
 
     can extract_entities {
@@ -380,6 +346,16 @@ node dialogue_state{
                                 }else{
                                     visitor.dialogue_context["recieved"].list::append("location");
                                 }
+                            }
+                            elif(ent_type == "case_number"){
+                                if(visitor.dialogue_context["last_node"] == "cancellation"){
+                                    visitor.dialogue_context["cancel_casenumber"] = ent_text;
+                                }
+                                elif(visitor.dialogue_context["last_node"] == "status"){
+                                    visitor.dialogue_context["status_casenumber"] = ent_text;
+                                }
+                            }else{
+                                std.eer("We extracted an incorrect entity");
                             }
                         }
                     }
@@ -406,6 +382,23 @@ node dialogue_state{
         visitor.response = null;
     }
 
+    can second_request{
+        std.out("_________________Generating Failed request___________________________________");
+        data = file.load_json(global.train_state_path);
+        responses = [];
+        for obj in data{ 
+            if("second_request" == obj["name"]){
+                data = obj;
+            }
+        }
+        if(here.name in data["responses"]){
+            responses = data["responses"][here.name];
+            visitor.response = rand.choice(responses);
+        }
+        response = spawn here walker::send_message(phone_number = visitor.phone_number, answer = visitor.response);
+        visitor.response = null;
+    }
+
     can generate_successful_response{
         std.out("_________________Generating successful request___________________________________");
         data = file.load_json(global.train_state_path);
@@ -419,7 +412,7 @@ node dialogue_state{
             responses = data["responses"][here.name];
             visitor.response = rand.choice(responses);
         }
-        response = spawn here walker::reply_to_message(phone_number = visitor.phone_number, answer = visitor.response, message_id = visitor.user_data["message_id"]);
+        response = spawn here walker::send_message(phone_number = visitor.phone_number, answer = visitor.response);
         visitor.response = null;
     }
 
@@ -557,6 +550,8 @@ node dialogue_state{
             dialogue_context = visitor.dialogue_context
         );
     }
+
+    can do_something with talk entry{}
 }
 
 node dialog:dialogue_state{
@@ -602,7 +597,14 @@ node subscribe:dialogue_state{
         response = spawn here walker::subscribe(phone_number = visitor.phone_number);
         std.out(response);
         if(response["status_code"] == 200){
-            ::generate_successful_response;
+            if(response["is_successful"] == false){
+                ::second_request;
+            }else{
+                ::generate_successful_response;
+            }
+        }else{
+            // generate unseuccessful request
+            ::generate_failed_response;
         }
         ::continue_report;
     }
@@ -616,7 +618,14 @@ node unsubscribe:dialogue_state{
         response = spawn here walker::unsubscribe(phone_number = visitor.phone_number);
         std.out(response);
         if(response["status_code"] == 200){
-            ::generate_successful_response;
+            if(response["is_successful"] == false){
+                ::second_request;
+            }else{
+                ::generate_successful_response;
+            }
+        }else{
+            // generate unsecusseful request
+            ::generate_failed_response;
         }
         ::continue_report;
     }
@@ -625,8 +634,52 @@ node unsubscribe:dialogue_state{
 
 node status:dialogue_state{
     can status with talk entry{
+        if(!visitor.dialogue_context["status_casenumber"]){
+            //ask for the case number
+            std.out("________________Generating Status Case Number required__________________");
+            data = file.load_json(global.train_state_path);
+            responses = [];
+            for obj in data{ 
+                if("status_casenumber" == obj["name"]){
+                    responses = obj["responses"];
+                    visitor.response = rand.choice(responses);
+                }
+            }
+            if(visitor.response){
+                std.out("__We are sending the following response: ", visitor.response, "to user ", visitor.phone_number, here.name);
+                spawn here walker::reply_to_message(phone_number = visitor.phone_number, answer = visitor.response,  message_id = visitor.dialogue_context["repeat_id"]);
+                visitor.response = null;
+                std.out("________________________Finish Generating response_____________________-");
+            }
+            visitor.dialogue_context["repeat_report"] = false;
+        }else{
+            // update user on the status of their case
+            response = spawn here walker::status(case_number=visitor.dialogue_context["status_casenumber"]);
+            if(response["status_code"] == 200){
+                // generate response status_official
+                std.out("________________Generating Status of Case Successful request__________________");
+                data = file.load_json(global.train_state_path);
+                responses = [];
+                for obj in data{ 
+                    if("status_official" == obj["name"]){
+                        responses = obj["responses"];
+                        visitor.response = rand.choice(responses);
+                    }
+                }
+                visitor.response = visitor.response.str::replace("{comment}", response["latest_comment"]["body"]);
+                if(visitor.response){
+                    std.out("__We are sending the following response: ", visitor.response, "to user ", visitor.phone_number, here.name);
+                    spawn here walker::reply_to_message(phone_number = visitor.phone_number, answer = visitor.response,  message_id = visitor.dialogue_context["repeat_id"]);
+                    visitor.response = null;
+                    std.out("________________________Finish Generating response_____________________-");
+                }
+                visitor.dialogue_context["repeat_report"] = false;
+            }else{
+                ::generate_failed_response;
+            }
+        }
         visitor.dialogue_context["last_node"] = here.name;
-        std.out("We need to design this state");
+        std.out("-----------Project Completed-------------");
         ::continue_report;
     }
 }
@@ -635,14 +688,20 @@ node traffic_alert:dialogue_state{
     can nlu{}
     can give_traffic_updates with talk entry{
         visitor.dialogue_context["last_node"] = here.name;
-        response = latest.update();
+        // response = latest.update();
+        response = spawn here walker::traffic_alert();
         std.out(response);
-        image = response["image_url"];
-        document = response["document_url"];
-        response = spawn here walker::send_image_message_with_url(media_url=image, phone_number=visitor.phone_number);
-        std.out(response);
-        response = spawn here walker::send_document_message_by_Url(media_url=document, phone_number=visitor.phone_number);
-        std.out(response);
+        if(response["status_code"] == 200){
+            image = response["image_url"];
+            document = response["document_url"];
+            response = spawn here walker::send_image_message_with_url(media_url=image, phone_number=visitor.phone_number);
+            std.out(response);
+            response = spawn here walker::send_document_message_by_Url(media_url=document, phone_number=visitor.phone_number);
+            std.out(response);
+        }else{
+            // generate unsucessful report
+            ::generate_failed_response;
+        }
         ::continue_report;
     }
     can nlg{}
@@ -757,7 +816,7 @@ node traffic_report:dialogue_state{
                 ::cancel_or_confirm;
             }else{
                 std.out("bad Customer");
-                if(!image && !location){
+                if(!("image" in visitor.dialogue_context["recieved"]) && !("location" in visitor.dialogue_context["recieved"])){
                     std.out("_________________Generating no Image and Location Response___________________________________");
                     data = file.load_json(global.train_state_path);
                     responses = [];
@@ -775,7 +834,7 @@ node traffic_report:dialogue_state{
                     visitor.dialogue_context["repeat_report"] = true;
                     visitor.response = null;
                 }
-                elif(!image){
+                elif(!("image" in visitor.dialogue_context["recieved"])){
                     std.out("_________________Generating no Image Response___________________________________");
                     data = file.load_json(global.train_state_path);
                     responses = [];
@@ -793,7 +852,7 @@ node traffic_report:dialogue_state{
                     visitor.dialogue_context["repeat_report"] = true;
                     visitor.response = null;
                 }
-                elif(!location){
+                elif(!("location" in visitor.dialogue_context["recieved"])){
                     std.out("_________________Generating no Image and Location Response___________________________________");
                     data = file.load_json(global.train_state_path);
                     responses = [];
@@ -812,7 +871,24 @@ node traffic_report:dialogue_state{
                     visitor.response = null;
                 }
                 else{
-                    std.out("This user is special they caused the only condition that should not happen to happen.");
+                    std.out("This user is special they caused the only condition that should not happen to happen. What happened here is that the user didn't provide a description or the description score is way too high.");
+                    std.out("________________Generating Response for description__________________");
+                    data = file.load_json(global.train_state_path);
+                    responses = [];
+                    for obj in data{ 
+                        if("unanswered_question" == obj["name"]){
+                            data = obj;
+                        }
+                    }
+                    if("description" in data["responses"]){
+                        responses = data["responses"]["image"];
+                        visitor.response = rand.choice(responses);
+                    }
+                    response = spawn here walker::send_message(phone_number = visitor.phone_number, answer = visitor.response);
+                    visitor.dialogue_context["repeat_id"] = response["messages"][0]["id"];
+                    visitor.dialogue_context["repeat_report"] = true;
+                    visitor.response = null;
+                    visitor.dialogue_context["last_node"] = "description";
                 }
             }
         }
@@ -987,6 +1063,18 @@ node confirmation:dialogue_state{
         std.out(visitor.yes_or_no);
     }
 
+    can create_title{
+        title_length = global.title_words;
+        text = visitor.dialogue_context["description"];
+        list_of_text = text.str::split(" ");
+        visitor.dialogue_context["report_title"] = "";
+        i=0;
+        while i<title_length{
+            visitor.dialogue_context["report_title"] = title+" "+list_of_text[i];
+            i+=1;
+        }
+    }
+
     can process with talk entry{
         std.out("Processing cancelled");
     }
@@ -1006,29 +1094,53 @@ node confirmation:dialogue_state{
                 responses = data["responses"]["yes"];
                 visitor.response = rand.choice(responses);
             }
-            response = spawn here walker::traffic_report(description = visitor.dialogue_context["description"]);
-            std.out(response);
-            if("case_reference_number" in response["response"]){
-                visitor.dialogue_context["case_number"] = response["response"]["case_reference_number"];
+            response = null;
+            ::create_title;
+            if(visitor.dialogue_context["live_location"]){
+                if((visitor.dialogue_context["live_location"]["latitude"]) || (visitor.dialogue_context["live_location"]["longitude"])){
+                    response = send.case_report(visitor.dialogue_context["description"], visitor.dialogue_context["live_location"]["latitude"], visitor.dialogue_context["live_location"]["longitude"], visitor.dialogue_context["report_title"]);
+                }else{
+                    std.err("The user somehow managed to supply latitude or longitude only. Checkthis exceptions it means there is an error in the code and you need to fix it now");
+                    response = send.case_report(visitor.dialogue_context["description"], null, null, visitor.dialogue_context["report_title"]);
+                }
+            }else{
+                response = send.case_report(visitor.dialogue_context["description"], null, null, visitor.dialogue_context["report_title"]);
             }
-            std.out("_____________before_____________________: ", visitor.response);
-            visitor.response = visitor.response.str::replace("{case_number}", visitor.dialogue_context["case_number"]);
-            std.out("_____________after_____________________: ", visitor.response);
-            response = spawn here walker::send_message(phone_number = visitor.phone_number, answer = visitor.response);
-            visitor.response = null;
-            visitor.dialogue_context = {
-                "image": [],
-                "video": [],
-                "audio": [],
-                "description": "",
-                "location": [],
-                "asked": [],
-                "last_node": "",
-                "recieved": [],
-                "case_number": visitor.dialogue_context["case_number"]
-            };
-            visitor.yes_or_no = null;
-            visitor.right_away_transition = null;
+            std.out(response);
+            if(response["status_code"] == 200){    
+                if("case_reference_number" in response["response"]){
+                    visitor.dialogue_context["case_number"] = response["response"]["case_reference_number"];
+                }
+                std.out("_____________before_____________________: ", visitor.response);
+                visitor.response = visitor.response.str::replace("{case_number}", visitor.dialogue_context["case_number"]);
+                std.out("_____________after_____________________: ", visitor.response);
+                response = spawn here walker::send_message(phone_number = visitor.phone_number, answer = visitor.response);
+                visitor.response = null;
+                visitor.dialogue_context = {
+                        "image": [],
+                        "video": [],
+                        "audio": [],
+                        "description": "",
+                        "location": [],
+                        "asked": [],
+                        "last_node": "",
+                        "recieved": [],
+                        "case_number": visitor.dialogue_context["case_number"],
+                        "repeat_report": false,
+                        "repeat_id": "",
+                        "live_location": {
+                            "latitude": null,
+                            "longitude": null
+                        },
+                        "cancel_casenumber": "",
+                        "status_casenumber": ""
+                    };
+                visitor.yes_or_no = null;
+                visitor.right_away_transition = null;
+            }else{
+                // generate unsecusseful request
+                :: generate_failed_response;
+            }
         }
         elif(visitor.yes_or_no == "no"){
             std.out("_________________Generating Confirm with no confirm request___________________________________");
@@ -1056,7 +1168,15 @@ node confirmation:dialogue_state{
                 "asked": [],
                 "last_node": "",
                 "recieved": [],
-                "case_number": ""
+                "case_number": "",
+                "repeat_report": false,
+                "repeat_id": "",
+                "live_location": {
+                    "latitude": null,
+                    "longitude": null
+                },
+                "cancel_casenumber": "",
+                "status_casenumber": ""
             };
             std.out("_________________Generating Confirm with no confirm request___________________________________");
         }
@@ -1112,104 +1232,178 @@ node cancellation:dialogue_state{
 
     can cancel with talk entry{
         std.out("PPPPPPPPPPPPPP___Cancellation Node___PPPPPPPPPPPPPPPPPPPP");
-        if(!visitor.dialogue_context["recieved"]){
-            std.out("_________________Generating Cancell without nothing recieved request___________________________________");
-            data = file.load_json(global.train_state_path);
-            responses = [];
-            for obj in data{ 
-                if("cancel_user" == obj["name"]){
-                    data = obj;
+        if(!visitor.dialogue_context["cancel_casenumber"]){
+            if(visitor.dialogue_context["recieved"]){
+                std.out("_________________Generating Cancell without yes cancell request___________________________________");
+                data = file.load_json(global.train_state_path);
+                responses = [];
+                for obj in data{ 
+                    if("cancel_user" == obj["name"]){
+                        data = obj;
+                    }
                 }
+                if("yes" in data["responses"]){
+                    responses = data["responses"]["yes"];
+                    visitor.response = rand.choice(responses);
+                }
+                response = spawn here walker::send_message(phone_number = visitor.phone_number, answer = visitor.response);
+                visitor.response = null;
+                visitor.dialogue_context = {
+                    "image": [],
+                    "video": [],
+                    "audio": [],
+                    "description": "",
+                    "location": [],
+                    "asked": [],
+                    "last_node": "",
+                    "recieved": [],
+                    "case_number": "",
+                    "repeat_report": false,
+                    "repeat_id": "",
+                    "live_location": {
+                        "latitude": null,
+                        "longitude": null
+                    },
+                    "cancel_casenumber": "",
+                    "status_casenumber": ""
+                };
+                visitor.yes_or_no = null;
+                visitor.right_away_transition = null;
             }
-            if("no_report" in data["responses"]){
-                responses = data["responses"]["no_report"];
-                visitor.response = rand.choice(responses);
+            else{
+                    std.out("________________Generating Cancel Case Number required__________________");
+                data = file.load_json(global.train_state_path);
+                responses = [];
+                for obj in data{ 
+                    if("cancel_casenumber" == obj["name"]){
+                        responses = obj["responses"];
+                        visitor.response = rand.choice(responses);
+                    }
+                }
+                if(visitor.response){
+                    std.out("__We are sending the following response: ", visitor.response, "to user ", visitor.phone_number, here.name);
+                    spawn here walker::reply_to_message(phone_number = visitor.phone_number, answer = visitor.response,  message_id = visitor.dialogue_context["repeat_id"]);
+                    visitor.response = null;
+                    std.out("________________________Finish Generating response_____________________-");
+                }
+                visitor.dialogue_context["repeat_report"] = false;
             }
-            response = spawn here walker::send_message(phone_number = visitor.phone_number, answer = visitor.response);
-            visitor.response = null;
         }
-        elif(visitor.dialogue_context["recieved"] && visitor.yes_or_no != "yes"){
-            std.out("_________________Generating Cancell default request___________________________________");
-            data = file.load_json(global.train_state_path);
-            responses = [];
-            for obj in data{ 
-                if("cancel_user" == obj["name"]){
-                    data = obj;
+        else{    
+            if(!visitor.dialogue_context["recieved"]){
+                std.out("_________________Generating Cancell without nothing recieved request___________________________________");
+                data = file.load_json(global.train_state_path);
+                responses = [];
+                for obj in data{ 
+                    if("cancel_user" == obj["name"]){
+                        data = obj;
+                    }
+                }
+                if("no_report" in data["responses"]){
+                    responses = data["responses"]["no_report"];
+                    visitor.response = rand.choice(responses);
+                }
+                response = spawn here walker::send_message(phone_number = visitor.phone_number, answer = visitor.response);
+                visitor.response = null;
+            }
+            elif(visitor.dialogue_context["recieved"] && visitor.yes_or_no != "yes"){
+                std.out("_________________Generating Cancell default request___________________________________");
+                data = file.load_json(global.train_state_path);
+                responses = [];
+                for obj in data{ 
+                    if("cancel_user" == obj["name"]){
+                        data = obj;
+                    }
+                }
+                if("default" in data["responses"]){
+                    responses = data["responses"]["default"];
+                    visitor.response = rand.choice(responses);
+                }
+                response = spawn here walker::send_message(phone_number = visitor.phone_number, answer = visitor.response);
+                visitor.response = null;
+                visitor.right_away_transition = here;
+            }
+            elif(visitor.yes_or_no == "no"){
+                std.out("_________________Generating Cancell without no cancell request___________________________________");
+                data = file.load_json(global.train_state_path);
+                responses = [];
+                for obj in data{ 
+                    if("cancel_user" == obj["name"]){
+                        data = obj;
+                    }
+                }
+                if("no" in data["responses"]){
+                    responses = data["responses"]["no"];
+                    visitor.response = rand.choice(responses);
+                }
+                response = spawn here walker::send_message(phone_number = visitor.phone_number, answer = visitor.response);
+                visitor.response = null;
+                visitor.yes_or_no = null;
+                visitor.right_away_transition = null;
+            }
+            elif(visitor.yes_or_no == "yes"){
+                response  = spawn here walker::cancel(phone_number=visitor.phone_number, case_number=visitor.dialogue_context["cancel_casenumber"]);
+                if((response["status_code"] == 200) || (response["status_code"] == 204)){    
+                    std.out("_________________Generating Cancell without yes cancell request___________________________________");
+                    data = file.load_json(global.train_state_path);
+                    responses = [];
+                    for obj in data{ 
+                        if("cancel_user" == obj["name"]){
+                            data = obj;
+                        }
+                    }
+                    if("yes" in data["responses"]){
+                        responses = data["responses"]["yes"];
+                        visitor.response = rand.choice(responses);
+                    }
+                    response = spawn here walker::send_message(phone_number = visitor.phone_number, answer = visitor.response);
+                    visitor.response = null;
+                    visitor.dialogue_context = {
+                        "image": [],
+                        "video": [],
+                        "audio": [],
+                        "description": "",
+                        "location": [],
+                        "asked": [],
+                        "last_node": "",
+                        "recieved": [],
+                        "case_number": "",
+                        "repeat_report": false,
+                        "repeat_id": "",
+                        "live_location": {
+                            "latitude": null,
+                            "longitude": null
+                        },
+                        "cancel_casenumber": "",
+                        "status_casenumber": ""
+                    };
+                    visitor.yes_or_no = null;
+                    visitor.right_away_transition = null;
+                }else{
+                    // generate unsucsseful request
+                    ::generate_failed_response;
                 }
             }
-            if("default" in data["responses"]){
-                responses = data["responses"]["default"];
-                visitor.response = rand.choice(responses);
-            }
-            response = spawn here walker::send_message(phone_number = visitor.phone_number, answer = visitor.response);
-            visitor.response = null;
-            visitor.right_away_transition = here;
-        }
-        elif(visitor.yes_or_no == "no"){
-            std.out("_________________Generating Cancell without no cancell request___________________________________");
-            data = file.load_json(global.train_state_path);
-            responses = [];
-            for obj in data{ 
-                if("cancel_user" == obj["name"]){
-                    data = obj;
+            else{
+                std.out("_________________________User made a rare exeption___________________________");
+                data = file.load_json(global.train_state_path);
+                responses = [];
+                for obj in data{ 
+                    if("cancel_user" == obj["name"]){
+                        data = obj;
+                    }
                 }
-            }
-            if("no" in data["responses"]){
-                responses = data["responses"]["no"];
-                visitor.response = rand.choice(responses);
-            }
-            response = spawn here walker::send_message(phone_number = visitor.phone_number, answer = visitor.response);
-            visitor.response = null;
-            visitor.yes_or_no = null;
-            visitor.right_away_transition = null;
-        }
-        elif(visitor.yes_or_no == "yes"){
-            std.out("_________________Generating Cancell without yes cancell request___________________________________");
-            data = file.load_json(global.train_state_path);
-            responses = [];
-            for obj in data{ 
-                if("cancel_user" == obj["name"]){
-                    data = obj;
+                if("default" in data["responses"]){
+                    responses = data["responses"]["default"];
+                    visitor.response = rand.choice(responses);
                 }
+                response = spawn here walker::send_message(phone_number = visitor.phone_number, answer = visitor.response);
+                visitor.response = null;
+                visitor.right_away_transition = here;
             }
-            if("yes" in data["responses"]){
-                responses = data["responses"]["yes"];
-                visitor.response = rand.choice(responses);
-            }
-            response = spawn here walker::send_message(phone_number = visitor.phone_number, answer = visitor.response);
-            visitor.response = null;
-            visitor.dialogue_context = {
-                "image": [],
-                "video": [],
-                "audio": [],
-                "description": "",
-                "location": [],
-                "asked": [],
-                "last_node": "",
-                "recieved": [],
-                "case_number": ""
-            };
-            visitor.yes_or_no = null;
-            visitor.right_away_transition = null;
-        }
-        else{
-            std.out("_________________________User made a rare exeption___________________________");
-            data = file.load_json(global.train_state_path);
-            responses = [];
-            for obj in data{ 
-                if("cancel_user" == obj["name"]){
-                    data = obj;
-                }
-            }
-            if("default" in data["responses"]){
-                responses = data["responses"]["default"];
-                visitor.response = rand.choice(responses);
-            }
-            response = spawn here walker::send_message(phone_number = visitor.phone_number, answer = visitor.response);
-            visitor.response = null;
-            visitor.right_away_transition = here;
         }
         std.out("PPPPPPPPPPPPPP___Cancellation Node___PPPPPPPPPPPPPPPPPPPP");
+        visitor.dialogue_context["last_node"] = here.name;
     }
 }
 
@@ -1277,7 +1471,14 @@ node user {
         "recieved": [],
         "case_number": "",
         "repeat_report": false,
-        "repeat_id": ""
+        "repeat_id": "",
+        "live_location": {
+            "latitude": null,
+            "longitude": null
+        },
+        "cancel_casenumber": "",
+        "status_casenumber": "",
+        "report_title": ""
     };
 
     can start_conv with talk entry {

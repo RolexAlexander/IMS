@@ -10,14 +10,12 @@ password: password
 
 ## Load all the required NLP packages
 
-actions load module jac_nlp.use_qa
-actions load module jac_nlp.use_enc
-actions load module jac_nlp.tfm_ner
-actions load local utils/model/local/flow.py
-actions load local utils/model/local/local_module.py
-actions load local utils/model/local/latest.py
-actions load local utils/model/local/get_media.py
-actions load local utils/model/local/loc.py
+- actions load module jac_nlp.use_qa
+- actions load module jac_nlp.use_enc
+- actions load module jac_nlp.tfm_ner
+- actions load local utils/model/local/flow.py
+- actions load local utils/model/local/local_module.py
+- actions load local utils/model/local/get_media.py
 
 walker run bi_enc_load_model -ctx "{\"model_path\": \"saved_bi_encoder\"}"
 walker run tfm_ner_load_model -ctx "{\"model_path\": \"saved_tfm_ner\"}"
@@ -43,3 +41,6 @@ graph get -mode dot -o .main.dot
 "How long will it take to reach my destination during rush hour traffic?",
 "What is the best time to leave to avoid the traffic?",
 "Is there a way to avoid the traffic?"
+
+
+e10eb4cbd7dd4206c4780c8cdf7dbc3e12a8c20420bbf2e2a6cb0c2fa3c8e12b

@@ -29,6 +29,13 @@ sentinel register -set_active true -mode ir main.jir
 walker run bi_enc_load_model -ctx "{\"model_path\": \"saved_bi_encoder\"}"
 walker run tfm_ner_load_model -ctx "{\"model_path\": \"saved_tfm_ner\"}"
 
+jac run conv_app/conv_walkers.jac -walk load_actions
+
+jac run utils/model/kit/tfm_ner.jac -walk tfm_ner_train -ctx "{\"train_file\": \"utils/data/tfm_train.json\"}"
+jac run utils/model/kit/tfm_ner.jac -walk tfm_ner_save_model -ctx "{\"model_path\": \"saved_tfm_ner\"}"
+
+jac run utils/model/kit/tfm_ner.jac -walk tfm_ner_train -ctx "{\"train_file\": \"testing.json\"}"
+jac run utils/model/kit/tfm_ner.jac -walk tfm_ner_save_model -ctx "{\"model_path\": \"tobu_tfm_ner\"}"
 
 graph get -mode dot -o .main.dot
 dot -Tpng .main.dot -o .main.png

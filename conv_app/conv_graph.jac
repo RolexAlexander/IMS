@@ -29,27 +29,27 @@ graph dialogue_system {
         traffic_alert = spawn node::traffic_alert(imprint = [{"list_imprint":bienc['traffic_alert'], "name": "traffic_alert"}], name="traffic_alert");
         dialog +[intent_transition(intent="traffic_alert")]+>traffic_alert;
 
-        // traffic_report = spawn node::traffic_report(imprint = [{"list_imprint":bienc['traffic_report'], "name": "traffic_report"}], name="traffic_report");
-        // dialog +[intent_transition(intent="traffic_report")]+>traffic_report;
+        traffic_report = spawn node::traffic_report(imprint = [{"list_imprint":bienc['traffic_report'], "name": "traffic_report"}], name="traffic_report");
+        dialog +[intent_transition(intent="traffic_report")]+>traffic_report;
 
-        // status = spawn node::status(imprint = [{"list_imprint":bienc['status'], "name": "status"}], name="status");
-        // dialog +[intent_transition(intent="status")]+>status;
+        status = spawn node::status(imprint = [{"list_imprint":bienc['status'], "name": "status"}], name="status");
+        dialog +[intent_transition(intent="status")]+>status;
 
-        // location = spawn node::location(name = "location");
-        // traffic_report +[intent_transition(intent="location")]+>location;
+        location = spawn node::location(name = "location");
+        traffic_report +[intent_transition(intent="location")]+>location;
 
-        // description = spawn node::description(name = "description");
-        // traffic_report +[intent_transition(intent="description")]+>description;
+        description = spawn node::description(name = "description");
+        traffic_report +[intent_transition(intent="description")]+>description;
 
-        // image = spawn node::image(name = "image");
-        // traffic_report +[intent_transition(intent="image")]+>image;
+        image = spawn node::image(name = "image");
+        traffic_report +[intent_transition(intent="image")]+>image;
 
-        // cancellation = spawn node::cancellation(imprint = [{"list_imprint":bienc['cancellation'], "name": "cancellation"}], name="cancellation");
-        // traffic_report +[intent_transition(intent="cancellation")]+>cancellation;
-        // dialog +[intent_transition(intent="cancellation")]+>cancellation;
+        cancellation = spawn node::cancellation(imprint = [{"list_imprint":bienc['cancellation'], "name": "cancellation"}], name="cancellation");
+        traffic_report +[intent_transition(intent="cancellation")]+>cancellation;
+        dialog +[intent_transition(intent="cancellation")]+>cancellation;
 
-        // confirmation = spawn node::confirmation(name = "confirmation");
-        // traffic_report +[intent_transition(intent="confirmation")]+>confirmation;
+        confirmation = spawn node::confirmation(name = "confirmation");
+        traffic_report +[intent_transition(intent="confirmation")]+>confirmation;
     }
 }
 

@@ -108,6 +108,136 @@ walker get_jac_uuid{
     }
 }
 
+walker send_message{
+    has phone_number = " ";
+    has answer = " ";
+
+    url = global.whatsapp_url;
+    headers = {
+        "Authorization": "Bearer "+global.authorisation,
+        "Content-Type": "application/json"
+    };
+    data = {
+        "messaging_product": "whatsapp",
+        "recipient_type": "individual",
+        "recipient_type": "individual",
+        "to": phone_number,
+        "type": "text",
+        "text": {
+            "preview_url": False,
+            "body": answer
+        }
+    };
+    response = request.post(url ,data , headers);
+    std.out(response);
+    global.message_id = response["response"]["messages"][0]["id"];
+    std.out(global.message_id);
+    disengage;
+}
+
+walker reply_to_message{
+    has phone_number = "";
+    has answer = "";
+    has message_id = "";
+
+    url = global.whatsapp_url;
+    headers = {
+        "Authorization": "Bearer "+global.authorisation,
+        "Content-Type": "application/json"
+    };
+    data = {
+        "messaging_product": "whatsapp",
+        "recipient_type": "individual",
+        "to": phone_number,
+        "context": {
+            "message_id": message_id
+        },
+        "type": "text",
+        "text": {
+            "preview_url": false,
+            "body": answer
+        }
+    };
+    response = request.post(url ,data , headers);
+    std.out(response);
+    disengage;
+}
+
+walker send_image_message_with_url{
+    has phone_number = "";
+    has answer = "";
+    has media_url = "";
+
+    url = global.whatsapp_url;
+    headers = {
+        "Authorization": "Bearer "+global.authorisation,
+        "Content-Type": "application/json"
+    };
+    data = {
+        "messaging_product": "whatsapp",
+        "recipient_type": "individual",
+        "to": phone_number,
+        "type": "image",
+        "image": {
+            "link": media_url
+        }
+    };
+    response = request.post(url ,data , headers);
+    std.out(response);
+    disengage;
+}
+
+walker send_document_message_by_Url{
+    has phone_number = "";
+    has media_url = "";
+    has answer = "";
+
+    url = global.whatsapp_url;
+    headers = {
+        "Authorization": "Bearer "+global.authorisation,
+        "Content-Type": "application/json"
+    };
+    data = {
+        "messaging_product": "whatsapp",
+        "recipient_type": "individual",
+        "to": phone_number,
+        "type": "document",
+        "document": {
+            "link": media_url,
+            "caption": answer
+        }
+    };
+    response = request.post(url ,data , headers);
+    std.out(response);
+    disengage;
+}
+
+walker send_reply_with_reaction{
+    has phone_number = "";
+    has message_id = "";
+    has emoji = "";
+    has anchor response;
+
+    url = global.whatsapp_url;
+    headers = {
+        "Authorization": "Bearer "+global.authorisation,
+        "Content-Type": "application/json"
+    };
+    data = {
+        "messaging_product": "whatsapp",
+        "recipient_type": "individual",
+        "to": phone_number,
+        "type": "reaction",
+        "reaction": {
+            "message_id": message_id,
+            "emoji": emoji
+        }
+    };
+    response = request.post(url ,data , headers);
+    std.out(response);
+    disengage;
+}
+
 // talker 
 walker talk {
     has question, media_url, media_type, user_data, phone_number;
@@ -124,7 +254,14 @@ walker talk {
         "recieved": [],
         "case_number": "",
         "repeat_report": false,
-        "repeat_id": ""
+        "repeat_id": "",
+        "live_location": {
+            "latitude": null,
+            "longitude": null
+        },
+        "cancel_casenumber": "",
+        "status_casenumber": "",
+        "report_title": ""
     };
 
     has response;
@@ -148,6 +285,12 @@ walker talk {
         std.out(here.name);
         std.out("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
         //  || here.name == "image" || here.name == "description" || here.name == "location"
+        // if(here.name == "subscribe"){
+        //     here::subscribe;
+        // }
+        // if(here.name =="unsubscribe"){
+        //     here::unsubscribe;
+        // }
         if(here.name == "traffic_report"){
             std.out("______________________________true_______________________________");
             if(right_away_transition){
@@ -195,7 +338,7 @@ walker subscribe{
     has phone_number;
 
     headers = {};
-    url = "https://app.resolv-ims.com/ords/gms/subscription/subscribe";
+    url = "http://52.72.153.254:8050/api/v1/subscribe";
     data = {
         "subscription_type" : "whatsapp",
         "subscription_value" : phone_number
@@ -209,7 +352,7 @@ walker unsubscribe{
     has phone_number;
 
     headers = {};
-    url = "https://app.resolv-ims.com/ords/gms/subscription/unsubscribe";
+    url = "http://52.72.153.254:8050/api/v1/unsubscribe";
     data = {
         "subscription_type" : "whatsapp",
         "subscription_value" : phone_number
@@ -222,7 +365,7 @@ walker traffic_alert{
     has anchor response;
     has phone_number;
 
-    url = "http://52.72.153.254:8010/ords/gms/subscription/latest_notification";
+    url = "http://52.72.153.254:8050/api/v1/general-alerts/latest";
     data = {};
     headers = {};
     response = request.get(url, data, headers);
@@ -246,6 +389,35 @@ walker traffic_report{
     report {"Request Status": response};
 }
 
+walker status{
+    has anchor response;
+    has phone_number;
+    has case_number;
+
+    url = "http://52.72.153.254:8050/api/v1/cases/"+case_number+"/status";
+    headers = {};
+    data = {
+        "case_number": case_number
+    };
+    response = request.get(url, data, headers);
+    report {"Request Status": response};
+}
+
+walker cancel{
+    has anchor response;
+    has phone_number;
+    has case_number;
+
+    url = "http://52.72.153.254:8050/api/v1/cases/"+case_number+"/withdraw";
+    headers = {};
+    data = {
+        "case_number": case_number,
+        "phone_number": phone_number
+    };
+    response = request.get(url, data, headers);
+    report {"Request Status": response};
+}
+ 
 walker sample_walker: anyone {
     has id;
     with entry {

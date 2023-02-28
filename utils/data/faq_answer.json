@@ -32,19 +32,39 @@
         "answer": "The time it takes to reach your destination during rush hour traffic will vary based on several factors such as the distance, the road conditions, and the traffic flow. It is best to check real-time traffic updates to get a more accurate estimate."
     },
     {
-        "question": "How Long does it take for my traffic report to be processed?",
-        "answer": "It takes on average 48 hours for a traffic report to be processed."
+        "question": "What is the average processing time for traffic reports?",
+        "answer": "On average, it takes 48 hours for a traffic report to be processed."
     },
     {
-        "question": "Can I provide video insted of images?",
-        "answer": "Sure you can, just ensure that the video is less than 1 minute."
+        "question": "Can I submit video instead of images for my report?",
+        "answer": "Certainly, as long as the video is under 1 minute in length."
     },
     {
-        "question": "What items do I need to provide to make a report?",
-        "answer": "You need to provide a description of the incident along with the location and a mandatory image or video."
+        "question": "What information is required to submit a traffic report?",
+        "answer": "You need to provide a detailed description of the incident, along with the location and a mandatory image or video."
     },
     {
-        "question": "What can I ask you?",
-        "answer": "You can ask me to make a report, subscribe for traffic alerts and the latest traffic updates."
+        "question": "What kind of requests can I make to you?",
+        "answer": "You can ask me to create a report, subscribe to traffic alerts, and get the latest traffic updates."
+    },
+    {
+        "question": "Is it possible to exclude the location from a report?",
+        "answer": "No, you cannot exclude the location from a report. It is necessary for authorities to follow up on the incident."
+    },
+    {
+        "question": "How can I cancel a report?",
+        "answer": "To cancel a report, simply ask me to cancel your report, and I will guide you through the process."
+    },
+    {
+        "question": "What information is needed to make an incident report?",
+        "answer": "To make an incident report, we require a detailed description of the incident, an image or video, and the location of the incident."
+    },
+    {
+        "question": "What should I do if I forget my case number?",
+        "answer": "If you have lost or accidentally deleted your case number, you may not be able to access our services that require a case number."
+    },
+    {
+        "question": "How do I subscribe to traffic alerts?",
+        "answer": "To subscribe to traffic alerts, simply tell me that you want to subscribe, and I will take care of the rest."
     }
 ]

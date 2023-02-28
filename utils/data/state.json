@@ -2,74 +2,49 @@
   {
     "name": "greetings",
     "responses": [
-      "Hello! How can I help you today?",
-      "Hi! What can I assist you with?",
-      "Good day! How can I be of service?",
-      "Greetings! How can I make your day better?",
-      "Hi there! What can I do for you today?",
-      "Good morning/afternoon/evening! How may I help you?",
-      "Hello, my friend! What brings you here today?",
-      "Hi, it's nice to see you! How can I assist?",
-      "Greetings, I'm here to help! What can I do for you?",
-      "Hello! I'm here to make your day a little easier, how can I help?"
+      "Hello there! My name is Lysa, and I'm the virtual assistant for the Resolv IMS System. I'm here to assist you with traffic alerts and documentation of traffic reports, as well as other useful features. How may I assist you today?",
+      "Greetings! I am Lysa, the virtual assistant for the Resolv IMS System. My purpose is to help you with traffic alerts and incident reports, as well as a variety of other features. Please don't hesitate to let me know how I can be of service.",
+      "Good day! My name is Lysa, and I'm the virtual assistant for the Resolv IMS System. I'm here to help you with anything you need, from traffic alerts to documentation of traffic reports and more. What can I do for you today?",
+      "Salutations! I'm Lysa, the virtual assistant for the Resolv IMS System. It's my pleasure to assist you with traffic alerts, incident reports, and other useful features. Please let me know how I can help you.",
+      "Welcome! My name is Lysa, and I'm the virtual assistant for the Resolv IMS System. My purpose is to help you with traffic alerts and incident reports, as well as a variety of other features. How can I be of assistance to you today?",
+      "Good morning/afternoon/evening! I'm Lysa, the virtual assistant for the Resolv IMS System. My job is to assist you with traffic alerts and documentation of traffic reports, as well as other features that may be useful to you. What can I help you with today?",
+      "Nice to meet you! I'm Lysa, the virtual assistant for the Resolv IMS System. I'm here to assist you with traffic alerts and incident reports, as well as a variety of other features that can make your life easier. What can I help you with today?",
+      "Howdy! My name is Lysa, and I'm the virtual assistant for the Resolv IMS System. My purpose is to assist you with traffic alerts, incident reports, and other useful features. Please let me know how I can be of service.",
+      "Hi there! I'm Lysa, the virtual assistant for the Resolv IMS System. It's my pleasure to assist you with traffic alerts, documentation of traffic reports, and other helpful features. What can I help you with today?",
+      "Hello! I am Lysa, the virtual assistant for the Resolv IMS System. My purpose is to help you with traffic alerts and documentation of traffic reports, as well as other useful features. Please don't hesitate to let me know how I can assist you today."
     ],
     "extracted_item": {},
     "variable": [],
     "resource": ""
   },
   {
-    "name": "subscribe",
-    "responses": [
-      "Sure thing! I can help you sign up for traffic alerts.",    
-      "Of course! Let me assist you in subscribing for traffic updates.",    
-      "No problem! I can assist you in receiving traffic alerts.",    
-      "Absolutely! I'd be happy to help you be informed of traffic updates.",    
-      "Sure thing! I'll help you receive traffic notifications.",    
-      "Absolutely! I can add you to the traffic alert list.",    
-      "Of course! Let me assist you in subscribing for traffic reports.",    
-      "No problem! I'll help you get traffic updates sent to you.",    
-      "Absolutely! I'll assist you in being notified of traffic changes.",    
-      "Of course! I'd be happy to help you subscribe for traffic updates."
-    ],
-    "extracted_item": {},
-    "variable": [],
-    "resource": ""
-  },
-  {
-    "name": "unsubscribe",
-    "responses": [
-        "Okay, I'll remove you from the traffic alert list.",
-        "No problem, I'll stop sending you traffic notifications.",
-        "I understand, I'll unsubscribe you from traffic updates.",
-        "Sure thing, I'll take you off the traffic alert list.",
-        "I'll make sure to turn off traffic alerts for your account.",
-        "I got it, I'll cancel your traffic alert subscription.",
-        "I'll make sure you no longer receive traffic alerts.",
-        "I'll deactivate traffic alerts for you.",
-        "Understood, I'll stop sending traffic notifications to you.",
-        "I'll remove your name from the traffic alert list."
-    ],
-    "extracted_item": {},
-    "variable": [],
-    "resource": ""
-  },
-  {
-    "name": "status",
-    "responses": [
-      "We're sorry, but our server is currently down, so we can't check the status of your report.",  
-      "Our server is currently offline, so we can't provide you with an update on your report at this time.",  
-      "Due to a server outage, we're unable to check the status of your report at the moment.",  
-      "We're having technical difficulties with our server and can't access your report status right now.",  
-      "Sorry, but our server is currently unavailable and we can't check your report status at this time.",  
-      "We apologize, but the server is down and we can't verify the status of your report.",  
-      "I'm sorry, but our server is temporarily offline and we can't check your report status at this time.",  
-      "Due to a server issue, we're unable to verify the status of your report right now.",  
-      "We regret to inform you that our server is down and we can't check your report status at the moment.",  
-      "Unfortunately, our server is currently unavailable and we can't provide an update on your report status."
-    ],
-    "extracted_item": {},
-    "variable": [],
-    "resource": ""
+    "name": "second_request",
+    "responses": {
+      "subscribe": [
+        "It appears that you're already signed up for traffic updates.",    
+        "I noticed that you have already subscribed for traffic alerts.",    
+        "I see that you're on the list for receiving traffic updates.",    
+        "You seem to be all set for traffic notifications.",    
+        "I have confirmed that you have subscribed for traffic news.",    
+        "It looks like you are already receiving traffic updates.",    
+        "I'm informed that you are subscribed for traffic notifications.",    
+        "I'm aware that you have already signed up for traffic updates.",    
+        "You seem to have already registered for traffic alerts.",    
+        "I have it on record that you have subscribed for traffic updates."
+      ],
+      "unsubscribe": [
+        "It appears that you have already unsubscribed from receiving traffic updates.",    
+        "It seems that you have opted out of traffic updates already.",    
+        "You have already unsubscribed from traffic updates, it seems.",    
+        "It looks like you have decided to no longer receive traffic updates.",    
+        "Traffic updates seem to be something you have chosen to opt out of.",    
+        "From what I can see, you are no longer subscribed to traffic updates.",    
+        "You seem to have already removed yourself from the traffic updates list.",    
+        "Traffic updates appear to not be something you want to receive anymore.",    
+        "It seems that traffic updates are no longer part of your subscribed list.",    
+        "Your status for traffic updates appears to be set as unsubscribed."
+      ]
+    }
   },
   {
     "name": "traffic_alert",
@@ -108,60 +83,31 @@
     "resource": ""
   },
   {
-    "name": "failed_request",
-    "responses": {
-      "subscribe": [
-        "It appears that you're already signed up for traffic updates.",    
-        "I noticed that you have already subscribed for traffic alerts.",    
-        "I see that you're on the list for receiving traffic updates.",    
-        "You seem to be all set for traffic notifications.",    
-        "I have confirmed that you have subscribed for traffic news.",    
-        "It looks like you are already receiving traffic updates.",    
-        "I'm informed that you are subscribed for traffic notifications.",    
-        "I'm aware that you have already signed up for traffic updates.",    
-        "You seem to have already registered for traffic alerts.",    
-        "I have it on record that you have subscribed for traffic updates."
-      ],
-      "unsubscribe": [
-        "It appears that you have already unsubscribed from receiving traffic updates.",    
-        "It seems that you have opted out of traffic updates already.",    
-        "You have already unsubscribed from traffic updates, it seems.",    
-        "It looks like you have decided to no longer receive traffic updates.",    
-        "Traffic updates seem to be something you have chosen to opt out of.",    
-        "From what I can see, you are no longer subscribed to traffic updates.",    
-        "You seem to have already removed yourself from the traffic updates list.",    
-        "Traffic updates appear to not be something you want to receive anymore.",    
-        "It seems that traffic updates are no longer part of your subscribed list.",    
-        "Your status for traffic updates appears to be set as unsubscribed."
-      ]
-    }
-  },
-  {
     "name": "successful_request",
     "responses": {
       "subscribe": [
-        "You're now subscribed for traffic updates. Need anything else?",
-        "Traffic updates subscription confirmed. Can I assist with anything else?",
-        "You have successfully signed up for traffic updates. Anything else I can do for you?",
-        "Subscribed for traffic updates. Is there anything else I can assist you with?",
-        "Your traffic updates subscription is all set. How else can I help you today?",
-        "Confirmed: you are now subscribed for traffic updates. Can I do anything else for you?",
-        "Traffic updates subscription complete. Do you need help with anything else?",
-        "You are now receiving traffic updates. Can I assist with anything else?",
-        "Subscription to traffic updates successful. Is there anything else I can help you with?",
-        "Your traffic updates subscription is in place. Can I be of any further assistance?"
+        "You're now subscribed for traffic updates.",
+        "Traffic updates subscription confirmed.",
+        "You have successfully signed up for traffic updates.",
+        "Subscribed for traffic updates.",
+        "Your traffic updates subscription is all set.",
+        "Confirmed: you are now subscribed for traffic updates.",
+        "Traffic updates subscription complete.",
+        "You are now receiving traffic updates.",
+        "Subscription to traffic updates successful.",
+        "Your traffic updates subscription is in place."
       ],
       "unsubscribe": [
-        "Your number has been removed from traffic updates. Need anything else?",
-        "You're all set! Your number won't receive traffic updates anymore. Can I assist with anything else?",
-        "Good news, your number has been taken off traffic updates. Is there anything else I can do for you?",
-        "Your request has been processed, your number won't receive traffic updates anymore. Anything else I can help with?",
-        "All done! Your number has been removed from traffic update notifications. How else can I be of service?",
-        "Traffic updates for your number have been discontinued. Can I assist with anything else?",
-        "Your number won't receive traffic updates anymore, it's been successfully removed. Need anything else?",
-        "Traffic updates for your number are a thing of the past. Is there anything else I can help with?",
-        "You're no longer subscribed to traffic updates. Is there anything else I can do for you?",
-        "Your number has been successfully unlinked from traffic updates. Can I help with anything else?"
+        "Your number has been removed from traffic updates.",
+        "You're all set! Your number won't receive traffic updates anymore.",
+        "Good news, your number has been taken off traffic updates.",
+        "Your request has been processed, your number won't receive traffic updates anymore.",
+        "All done! Your number has been removed from traffic update notifications.",
+        "Traffic updates for your number have been discontinued.",
+        "Your number won't receive traffic updates anymore, it's been successfully removed.",
+        "Traffic updates for your number are a thing of the past.",
+        "You're no longer subscribed to traffic updates.",
+        "Your number has been successfully unlinked from traffic updates."
       ]
     }
   },
@@ -218,6 +164,18 @@
         "The submission of both the location and an image of the incident is mandatory when reporting traffic issues. Could you please supply them?",    
         "To report a traffic issue effectively, both the location and an image of the incident must be included. Would you be willing to provide them?",    
         "Traffic issue reports require the addition of both the location and an image of the incident. Could you furnish us with them, please?"
+      ],
+      "description": [
+        "It appears that a detailed description of the incident was not provided. Would you mind sharing one to help us create an accurate incident report?",
+        "We apologize, but it seems that we don't have a detailed description of the incident. Can you kindly provide us with one? It's necessary for our incident report.",
+        "We need a detailed description of the incident to create an incident report. If you could kindly provide one, we would be grateful.",
+        "To create a comprehensive incident report, we require a detailed description of the incident. Would you please provide us with one?",
+        "We're sorry, but we don't have a complete description of the incident. Can you please share a detailed description with us for our incident report?",
+        "It's essential to have a detailed description of the incident for our incident report. Could you kindly provide us with one, please?",
+        "We require a detailed description of the incident to create an incident report. Could you please provide us with one? Thank you.",
+        "It seems that we don't have all the necessary details about the incident. Would you mind sharing a detailed description with us? It's important for our incident report.",
+        "A detailed description of the incident is necessary to create an accurate incident report. Could you please provide us with one? Thank you.",
+        "We kindly request a detailed description of the incident to create an incident report. Your assistance in providing this information would be greatly appreciated."
       ]
     }
   },
@@ -234,7 +192,16 @@
         "Can you provide the location of the incident?",    
         "I'd like to know the location of the incident. Can you tell me?",    
         "The location of the incident is important. Can you share it with me?",    
-        "Where was the incident located?"
+        "Where was the incident located?",
+        "May I kindly ask for the location of the incident, please?",
+        "Could you please provide me with the location of the incident?",
+        "Would you be able to tell me the location of the incident, please?",
+        "To better assist you, could you please provide me with the location of the incident?",
+        "May I request the location of the incident from you, please?",
+        "Could you kindly inform me of the location of the incident?",
+        "I would greatly appreciate it if you could provide me with the location of the incident.",
+        "If it's not too much trouble, could you please let me know the location of the incident?",
+        "Can you please share the location of the incident with me, so I can assist you further?"
       ],
       "image": [
         "Could you please send an image of the incident?",    
@@ -369,6 +336,128 @@
       "May I please ask you to provide the information mentioned above to help me complete the report?",
       "Can I kindly ask you to provide the information mentioned earlier so that I can complete the report?",
       "It would be very helpful if you could provide the information mentioned above to help me complete the report."
+    ]
+  },
+  {
+    "name": "cancel_casenumber",
+    "responses": [
+      "May I kindly ask for the case number of the report you wish to cancel?",
+      "To proceed with the cancellation, could you please provide us with the case number of the report in question?",
+      "We need the case number of the report you wish to cancel. Could you please provide it for us?",
+      "In order to cancel the report, we require the case number. Would you be able to provide us with that information?",
+      "To assist you with canceling the report, may I request the case number, please?",
+      "Please provide the case number of the report you wish to cancel so that we can assist you accordingly.",
+      "Could you kindly share the case number of the report you would like to cancel?",
+      "We would be happy to help you cancel the report. Could you please provide us with the case number?",
+      "So that we may proceed with canceling the report, please provide us with the case number at your earliest convenience.",
+      "To ensure the cancellation of the correct report, could you please provide us with the case number associated with it?"
+    ]
+  },
+  {
+    "name": "status_casenumber",
+    "responses": [
+      "To assist you with checking the status of your report, could you please provide us with the associated case number?",
+      "We would be happy to help you check the status of your report. Can you kindly provide us with the case number?",
+      "May I request the case number of the report you wish to check the status of, please?",
+      "In order to provide you with the current status of your report, we will need the associated case number. Could you please provide it for us?",
+      "To proceed with checking the status of your report, we require the case number. Would you be able to provide us with that information?",
+      "To ensure we are checking the correct report, may I kindly ask for the case number associated with it?",
+      "Please provide us with the case number of the report you wish to check the status of so that we can assist you accordingly.",
+      "Could you kindly share the case number of the report you would like to know the status of?",
+      "We understand you would like to check the status of a report. To assist you with this, may we please have the associated case number?",
+      "In order for us to provide you with an accurate status update, can you please provide us with the case number of the report in question?"
+    ]
+  },
+  {
+    "name": "failed_request",
+    "responses": {
+      "subscribe": [
+        "We apologize, but we are currently experiencing technical difficulties and cannot subscribe you for our traffic alerts at this time. We kindly ask that you try again later. Is there anything else we can help you with today?",
+        "Due to unforeseen technical issues, we are unable to subscribe you for our traffic alerts at the moment. We apologize for the inconvenience and ask that you try again later. Is there anything else we can assist you with?",
+        "We regret to inform you that we cannot subscribe you for our traffic alerts due to technical difficulties. Please try again later. In the meantime, is there anything else we can help you with?",
+        "Unfortunately, we are experiencing technical difficulties and are unable to subscribe you for our traffic alerts right now. We apologize for any inconvenience and suggest that you try again later. Can we assist you with anything else?",
+        "We apologize for any inconvenience, but we are currently unable to subscribe you for our traffic alerts due to technical difficulties. Please try again later. Is there anything else we can help you with in the meantime?",
+        "We are sorry to inform you that we cannot subscribe you for our traffic alerts at the moment due to technical issues. We kindly request that you try again later. Is there anything else we can help you with?",
+        "Regrettably, we are unable to subscribe you for our traffic alerts due to technical difficulties. We apologize for any inconvenience and ask that you try again later. Can we assist you with anything else in the meantime?",
+        "We apologize for the inconvenience, but we are currently experiencing technical difficulties that prevent us from subscribing you to our traffic alerts. Please try again later. Is there anything else we can help you with in the meantime?",
+        "Unfortunately, due to technical difficulties, we are currently unable to subscribe you for our traffic alerts. We apologize for any inconvenience and ask that you try again later. Is there anything else we can assist you with?",
+        "We regret to inform you that we cannot subscribe you for our traffic alerts at this time due to technical difficulties. Please try again later. In the meantime, can we help you with anything else?"
+      ],
+      "unsubscribe": [
+        "We apologize, but we are currently experiencing technical difficulties and cannot unsubscribe you from our traffic alerts at this time. We kindly ask that you try again later. Is there anything else we can assist you with today?",
+        "Due to unforeseen technical issues, we are unable to unsubscribe you from our traffic alerts at the moment. We apologize for the inconvenience and ask that you try again later. Is there anything else we can help you with?",
+        "We regret to inform you that we cannot unsubscribe you from our traffic alerts due to technical difficulties. Please try again later. In the meantime, is there anything else we can assist you with?",
+        "Unfortunately, we are experiencing technical difficulties and are unable to unsubscribe you from our traffic alerts right now. We apologize for any inconvenience and suggest that you try again later. Can we assist you with anything else?",
+        "We apologize for any inconvenience, but we are currently unable to unsubscribe you from our traffic alerts due to technical difficulties. Please try again later. Is there anything else we can help you with in the meantime?",
+        "We are sorry to inform you that we cannot unsubscribe you from our traffic alerts at the moment due to technical issues. We kindly request that you try again later. Is there anything else we can help you with?",
+        "Regrettably, we are unable to unsubscribe you from our traffic alerts due to technical difficulties. We apologize for any inconvenience and ask that you try again later. Can we assist you with anything else in the meantime?",
+        "We apologize for the inconvenience, but we are currently experiencing technical difficulties that prevent us from unsubscribing you from our traffic alerts. Please try again later. Is there anything else we can help you with in the meantime?",
+        "Unfortunately, due to technical difficulties, we are currently unable to unsubscribe you from our traffic alerts. We apologize for any inconvenience and ask that you try again later. Is there anything else we can assist you with?",
+        "We regret to inform you that we cannot unsubscribe you from our traffic alerts at this time due to technical difficulties. Please try again later. In the meantime, can we help you with anything else?"
+      ],
+      "cancellation": [
+        "We apologize, but we are unable to cancel your report at this time due to technical difficulties or an invalid case number. Please double-check the case number and try again later. Is there anything else we can assist you with?",
+        "Unfortunately, we are experiencing technical difficulties or the case number you entered is invalid, preventing us from cancelling your report. Could you please verify the case number and try again later? Is there anything else we can help you with?",
+        "We regret to inform you that we cannot cancel your report due to either technical difficulties or an invalid case number. Please ensure that the case number is correct and try again later. Is there anything else we can assist you with in the meantime?",
+        "We apologize for any inconvenience, but we are unable to cancel your report at this time due to technical difficulties or an incorrect case number. Would you please check the case number and try again later? Can we help you with anything else in the meantime?",
+        "Regrettably, we are unable to cancel your report due to technical issues or an invalid case number. We apologize for any inconvenience and suggest that you double-check the case number and try again later. Can we assist you with anything else?",
+        "We are sorry to inform you that we cannot cancel your report at the moment due to either technical difficulties or an invalid case number. Please verify the case number and try again later. Is there anything else we can help you with?",
+        "Unfortunately, due to technical difficulties or an incorrect case number, we are unable to cancel your report at this time. We apologize for any inconvenience and ask that you try again later. Is there anything else we can assist you with in the meantime?",
+        "We apologize for the inconvenience, but we are currently experiencing technical difficulties or an invalid case number that prevent us from cancelling your report. Please verify the case number and try again later. Is there anything else we can help you with in the meantime?",
+        "We regret to inform you that we cannot cancel your report at this time due to either technical difficulties or an incorrect case number. Please check the case number and try again later. Can we help you with anything else?",
+        "Unfortunately, we are unable to cancel your report due to technical issues or an invalid case number. We apologize for any inconvenience and ask that you double-check the case number and try again later. Is there anything else we can assist you with?"
+      ],
+      "confirmation": [
+        "We apologize for the inconvenience, but we are currently unable to create your report due to technical issues. Is there anything else we can assist you with?",
+        "Unfortunately, we are unable to create your report at this time due to technical difficulties. Can we help you with anything else?",
+        "We regret to inform you that we are experiencing technical issues that are preventing us from creating your report. Can we assist you with anything else in the meantime?",
+        "We apologize, but we are currently unable to create your report due to technical difficulties. Would you like us to help you with anything else?",
+        "We are sorry, but we are unable to create your report at this moment due to technical issues. Is there anything else we can assist you with?",
+        "Regrettably, we cannot create your report at this point in time due to technical issues. Can we help you with anything else?",
+        "We apologize for the inconvenience, but we are currently experiencing technical difficulties that are preventing us from creating your report. Is there anything else we can assist you with?",
+        "Unfortunately, we are unable to create your report at this time due to technical issues. Can we help you with anything else in the meantime?",
+        "We regret to inform you that we cannot create your report at this point in time due to technical difficulties. Can we assist you with anything else?",
+        "We are sorry, but we are currently unable to create your report due to technical issues. Is there anything else we can help you with?"
+      ],
+      "traffic_alert": [
+        "Unfortunately, we are unable to provide traffic alerts at this time due to technical difficulties. Can we help you with anything else?",
+        "We apologize for the inconvenience, but we are currently unable to provide traffic alerts due to technical issues. Is there anything else we can assist you with?",
+        "We regret to inform you that we are experiencing technical issues that are preventing us from providing traffic alerts at this point in time. Can we assist you with anything else?",
+        "We are sorry, but we are currently unable to provide traffic alerts due to technical difficulties. Would you like us to help you with anything else?",
+        "We apologize, but we are unable to provide traffic alerts at this moment due to technical issues. Can we help you with anything else?",
+        "Regrettably, we cannot provide traffic alerts at this point in time due to technical issues. Can we assist you with anything else?",
+        "We apologize for the inconvenience, but we are currently experiencing technical difficulties that are preventing us from providing traffic alerts. Is there anything else we can assist you with?",
+        "Unfortunately, we are unable to provide traffic alerts at this time due to technical difficulties. Can we help you with anything else in the meantime?",
+        "We regret to inform you that we cannot provide traffic alerts at this point in time due to technical difficulties. Can we assist you with anything else?",
+        "We are sorry, but we are currently unable to provide traffic alerts due to technical issues. Is there anything else we can help you with?"
+      ],
+      "status": [
+        "Unfortunately, we are currently experiencing technical difficulties or an invalid case number, and are unable to update you on the status of the report. Can we assist you with anything else?",
+        "We apologize, but we are currently unable to update you on the status of the report due to technical issues or an invalid case number. Can we help you with anything else?",
+        "We regret to inform you that we are experiencing technical difficulties or an invalid case number that are preventing us from updating you on the status of the report. Can we assist you with anything else?",
+        "I am sorry, but due to technical difficulties or an invalid case number, we are unable to update you on the status of the report at this time. Is there anything else we can help you with?",
+        "We apologize for the inconvenience, but we are currently experiencing technical difficulties or an invalid case number that are preventing us from updating you on the status of the report. Can we assist you with anything else?",
+        "Regrettably, we cannot update you on the status of the report at this point in time due to technical difficulties or an invalid case number. Can we assist you with anything else?",
+        "We are sorry, but due to technical difficulties or an invalid case number, we are unable to update you on the status of the report at this moment. Can we help you with anything else?",
+        "Unfortunately, we are currently unable to update you on the status of the report due to technical difficulties or an invalid case number. Can we assist you with anything else in the meantime?",
+        "We apologize for any inconvenience, but we are unable to update you on the status of the report at this time due to technical issues or an invalid case number. Can we assist you with anything else?",
+        "We regret to inform you that due to technical difficulties or an invalid case number, we are unable to update you on the status of the report. Can we help you with anything else?"
+      ]
+    }
+  },
+  {
+    "name": "status_official",
+    "responses": [
+      "Thank you for your request. Your report is still in progress, and the authorities left this comment: ''{comment}''. Is there anything else I can help you with today?",
+      "Good day! Your report is currently being worked on, and the authorities had this comment to share: ''{comment}''. Do you require any further assistance at this time?",
+      "I appreciate your patience. Your report is still in progress, and the authorities left the following comment: ''{comment}''. Please let me know if you need any additional assistance.",
+      "Thank you for reaching out. Your report is still in progress, and the authorities had this comment: ''{comment}''. Can I assist you with anything else while you wait?",
+      "I'm sorry for the delay. Your report is still in progress, and the authorities left this comment: ''{comment}''. Is there anything else I can do for you in the meantime?",
+      "Thank you for your request. Your report is still being worked on, and the authorities had this comment to share: ''{comment}''. Do you need any additional support from us?",
+      "Good news! Your report is still being processed, and the authorities left this comment: ''{comment}''. Can I help you with anything else while you wait?",
+      "Apologies for the wait. Your report is still in progress, and the authorities had this comment to leave: ''{comment}''. Please let me know if you require any further assistance.",
+      "I appreciate your understanding. Your report is still in progress, and the authorities left this comment: ''{comment}''. Is there anything else I can assist you with?",
+      "Thank you for your patience. Your report is still being worked on, and the authorities had this comment to share: ''{comment}''. Can I help you with anything else at this time?"
     ]
   }
 ]
